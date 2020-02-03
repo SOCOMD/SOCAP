@@ -16,7 +16,7 @@ import (
 
 var (
 	f      *os.File
-	logger log.Logger
+	logger *log.Logger
 )
 
 //export goRVExtensionVersion
