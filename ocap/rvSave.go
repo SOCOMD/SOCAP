@@ -19,7 +19,7 @@ type rvSave struct {
 	Frame         int
 }
 
-var rvSaveRe *regexp.Regexp = regexp.MustCompile(`"(.*?)","(.*?)","(.*?)",(\d+\.?\d*?),(\d)`)
+var rvSaveRe *regexp.Regexp = regexp.MustCompile(`"(.*?)","(.*?)","(.*?)",(\d+\.?\d*?),(\d+)`)
 
 func rvSaveHandler(args []string) error {
 	save, err := rvSaveParser(strings.Join(args, ","))

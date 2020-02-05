@@ -16,7 +16,7 @@ type rvStart struct {
 
 // example line
 // "Altis","tempMissionSP","",1
-var rvStartRe *regexp.Regexp = regexp.MustCompile(`"(.*?)","(.*?)","(.*?)",(\d)`)
+var rvStartRe *regexp.Regexp = regexp.MustCompile(`"(.*?)","(.*?)","(.*?)",(\d+)`)
 
 func rvStartHandler(args []string) error {
 	start, err := rvStartParser(strings.Join(args, ","))
