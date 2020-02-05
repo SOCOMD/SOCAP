@@ -15,8 +15,6 @@ var (
 // setup any variables here
 func init() {
 	resetCapture()
-
-	rvTest1()
 }
 
 func resetCapture() {
