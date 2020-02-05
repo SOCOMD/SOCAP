@@ -29,3 +29,9 @@ start-website:
 	@:$(call check_defined, DATA_DIR)
 	@:$(call check_defined, MAPS_DIR)
 	@SOCAP_MAPS_DIR=${MAPS_DIR} SOCAP_DATA_DIR=${DATA_DIR} docker-compose up --build
+
+addFile:
+	@:$(call check_defined, FILE_NAME)
+	@:$(call check_defined, FILE)
+	curl -vX POST -H "Content-Type: application/json" http://localhost:8080/recieve.php?option=addFile\&fileName=${FILE_NAME} -d @${FILE}
+	curl -vX POST http://localhost:8080/recieve.php?option=dbInsert\&worldName=Altis\&missionName=test\&missionDuration=60\&type=tvt\&filename=${FILE_NAME}

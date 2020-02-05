@@ -8,6 +8,7 @@
         $error = 1;
     } else {
         // Get list of operations from DB
+        // $req = "SELECT * FROM operations";
         $req = "SELECT * FROM operations WHERE
             type LIKE '%".addslashes($_POST['type'])."%' AND
             mission_name LIKE '%".addslashes($_POST["name"])."%' AND 
