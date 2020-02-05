@@ -1,12 +1,18 @@
 package ocap
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
+
+type entityFired interface {
+	addFiredEvent(e eventFire)
+}
 
 type capture struct {
 	MissionName   string        `json:"missionName"`
 	MissionAuthor string        `json:"missionAuthor"`
 	WorldName     string        `json:"worldName"`
-	CaptureDelay  float32       `json:"captureDelay"`
+	CaptureDelay  float64       `json:"captureDelay"`
 	EndFrame      int           `json:"endFrame"`
 	Markers       []marker      `json:"Markers"`
 	Entities      []interface{} `json:"entities"`
@@ -15,26 +21,30 @@ type capture struct {
 
 type marker struct{}
 
+type entity struct {
+	ID          int         `json:"id"`
+	Type        string      `json:"type"`
+	Name        string      `json:"name"`
+	FramesFired []eventFire `json:"framesFired"`
+	StartFrame  int         `json:"startFrameNum"`
+}
+
+func (e *entity) addFiredEvent(fire eventFire) {
+	e.FramesFired = append(e.FramesFired, fire)
+}
+
 type entityUnit struct {
-	ID          int                 `json:"id"`
-	Type        string              `json:"type"`
-	Name        string              `json:"name"`
-	Group       string              `json:"group"`
-	Side        string              `json:"side"`
-	IsPlayer    int                 `json:"isPlayer"`
-	StartFrame  int                 `json:"startFrameNum"`
-	FramesFired []eventFire         `json:"framesFired"`
-	Positions   []eventPositionUnit `json:"positions"`
+	entity
+	Group     string              `json:"group"`
+	Side      string              `json:"side"`
+	IsPlayer  int                 `json:"isPlayer"`
+	Positions []eventPositionUnit `json:"positions"`
 }
 
 type entityVehicle struct {
-	ID          int                    `json:"id"`
-	Class       string                 `json:"class"`
-	Type        string                 `json:"type"`
-	Name        string                 `json:"name"`
-	StartFrame  int                    `json:"startFrameNum"`
-	FramesFired []eventFire            `json:"framesFired"`
-	Positions   []eventPositionVehicle `json:"positions"`
+	entity
+	Class     string                 `json:"class"`
+	Positions []eventPositionVehicle `json:"positions"`
 }
 
 type eventFire struct {
@@ -73,7 +83,7 @@ type eventPositionVehicle struct {
 	Position  vec3
 	Direction int
 	IsAlive   int
-	Units     []int
+	Crew      []int
 }
 
 func (e eventPositionVehicle) MarshalJSON() ([]byte, error) {
@@ -81,7 +91,7 @@ func (e eventPositionVehicle) MarshalJSON() ([]byte, error) {
 		e.Position,
 		e.Direction,
 		e.IsAlive,
-		e.Units,
+		e.Crew,
 	})
 }
 
@@ -94,6 +104,19 @@ func (e eventConnected) MarshalJSON() ([]byte, error) {
 	return json.Marshal([]interface{}{
 		e.Frame,
 		"connected",
+		e.Name,
+	})
+}
+
+type eventDisconnected struct {
+	Frame int
+	Name  string
+}
+
+func (e eventDisconnected) MarshalJSON() ([]byte, error) {
+	return json.Marshal([]interface{}{
+		e.Frame,
+		"disconnected",
 		e.Name,
 	})
 }
@@ -113,6 +136,27 @@ func (e eventKilled) MarshalJSON() ([]byte, error) {
 		e.VictimID,
 		[]interface{}{
 			e.KillerID,
+			e.WeaponID,
+		},
+		e.Distance,
+	})
+}
+
+type eventHit struct {
+	Frame    int
+	VictimID int
+	HitterID int
+	WeaponID string
+	Distance int
+}
+
+func (e eventHit) MarshalJSON() ([]byte, error) {
+	return json.Marshal([]interface{}{
+		e.Frame,
+		"hit",
+		e.VictimID,
+		[]interface{}{
+			e.HitterID,
 			e.WeaponID,
 		},
 		e.Distance,

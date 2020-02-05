@@ -1,0 +1,74 @@
+package ocap
+
+import (
+	"errors"
+	"regexp"
+	"strconv"
+	"strings"
+)
+
+type rvUpdateVehicle struct {
+	ID        int
+	Position  vec3
+	Direction int
+	IsAlive   int
+	Crew      []int
+}
+
+// example line
+// 1,[24077.6,16301.7,0],0,1,[0,1]
+var rvUpdateVehicleRe *regexp.Regexp = regexp.MustCompile(`(\d+),\[(\d+\.?\d*?),(\d+\.?\d*?),(\d+\.?\d*?)\],(\d+),(\d+),\[(.*?)\]`)
+
+func rvUpdateVehicleHandler(args []string) error {
+	update, err := rvUpdateVehicleParser(strings.Join(args, ","))
+	if err != nil {
+		return err
+	}
+
+	vehicle := entities[update.ID].(*entityVehicle)
+	vehicle.Positions = append(vehicle.Positions, eventPositionVehicle{
+		Position:  update.Position,
+		Direction: update.Direction,
+		IsAlive:   update.IsAlive,
+		Crew:      update.Crew,
+	})
+	entities[update.ID] = vehicle
+
+	return nil
+}
+
+func rvUpdateVehicleParser(input string) (rvUpdateVehicle, error) {
+	match := rvUpdateVehicleRe.FindStringSubmatch(input)
+	if len(match) < 7 {
+		return rvUpdateVehicle{}, errors.New("Bad Input string")
+	}
+
+	// strip match string
+	id, _ := strconv.Atoi(match[1])
+	posX, _ := strconv.ParseFloat(match[2], 64)
+	posY, _ := strconv.ParseFloat(match[3], 64)
+	posZ, _ := strconv.ParseFloat(match[4], 64)
+	dir, _ := strconv.Atoi(match[4])
+	isAlive, _ := strconv.Atoi(match[5])
+
+	crewStr := strings.Split(match[7], ",")
+	crew := []int{}
+	if len(crewStr) > 0 {
+		for _, v := range crewStr {
+			id, _ := strconv.Atoi(v)
+			crew = append(crew, id)
+		}
+	}
+
+	return rvUpdateVehicle{
+		ID: id,
+		Position: vec3{
+			X: posX,
+			Y: posY,
+			Z: posZ,
+		},
+		Direction: dir,
+		IsAlive:   isAlive,
+		Crew:      crew,
+	}, nil
+}
