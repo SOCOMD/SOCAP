@@ -46,7 +46,7 @@ if ($option == "addFile") { // Add receieved file to this directory
     
 	error_log('FileName: '.$fileName);
     $content = file_get_contents('php://input');
-	$fp = fopen("./data/".$fileName.".json", "w");
+	$fp = fopen("./data/".$fileName, "w");
 	fwrite($fp, $content);
 	fclose($fp);
 } elseif ($option == "dbInsert") { // Insert values into SQLite database
@@ -70,7 +70,7 @@ if ($option == "addFile") { // Add receieved file to this directory
 			':world_name' => $_GET["worldName"],
 			':mission_name' => $_GET["missionName"],
 			':mission_duration' => $_GET["missionDuration"],
-			':filename' => str2filename($_GET["filename"]),
+			':filename' => $_GET["filename"],
 			':date' => $date,
 			':type' => $_GET["type"]
 		));

@@ -441,7 +441,7 @@ class UI {
 
 			row.addEventListener("click", () => {
 				localizable(this.modalBody, "loading");
-				processOp("data/" + op.filename + ".json");
+				processOp("data/" + op.filename);
 			});
 			table.insertBefore(row, table.childNodes[1]);
 		});

@@ -33,5 +33,8 @@ start-website:
 addFile:
 	@:$(call check_defined, FILE_NAME)
 	@:$(call check_defined, FILE)
+	@:$(call check_defined, INFO_NAME)
+	@:$(call check_defined, INFO_WORLD)
+	@:$(call check_defined, INFO_DURATION)
 	curl -vX POST -H "Content-Type: application/json" http://localhost:8080/recieve.php?option=addFile\&fileName=${FILE_NAME} -d @${FILE}
-	curl -vX POST http://localhost:8080/recieve.php?option=dbInsert\&worldName=Altis\&missionName=test\&missionDuration=60\&type=tvt\&filename=${FILE_NAME}
+	curl -vX POST http://localhost:8080/recieve.php?option=dbInsert\&worldName=${INFO_WORLD}\&missionName=${INFO_NAME}\&missionDuration=${INFO_DURATION}\&type=coop\&filename=${FILE_NAME}
