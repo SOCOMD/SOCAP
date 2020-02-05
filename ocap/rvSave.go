@@ -1,10 +1,14 @@
 package ocap
 
 import (
+	"encoding/json"
 	"errors"
+	"fmt"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type rvSave struct {
@@ -32,6 +36,20 @@ func rvSaveHandler(args []string) error {
 	for _, v := range entities {
 		captureJSON.Entities = append(captureJSON.Entities, v)
 	}
+
+	output, err := json.Marshal(captureJSON)
+	if err != nil {
+		return err
+	}
+
+	filePath := fmt.Sprintf("C:\\logs\\%d_socap.json", time.Now().Unix())
+	f, err := os.Create(filePath)
+	if err != nil {
+		return err
+	}
+
+	f.WriteString(string(output))
+	f.Close()
 
 	return nil
 }

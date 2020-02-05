@@ -1,4 +1,3 @@
-#define DLL_NAME "socap"
 #define REQUIRED_VERSION	2.0
 #define LOG(_args)			[":LOG:", _args] call ocap_fnc_extension
 #define BOOL(_cond)			(parseNumber (_cond))

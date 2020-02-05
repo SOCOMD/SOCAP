@@ -1,8 +1,6 @@
-#include "\userconfig\ocap\config.hpp"
-
 params ["_command","_args"];
 
-private _res = DLL_NAME callExtension [_command, _args];
+private _res = "socap" callExtension [_command, _args];
 
 _res params ["_result","_returnCode","_errorCode"];
 
