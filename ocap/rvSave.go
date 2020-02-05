@@ -19,6 +19,7 @@ type rvSave struct {
 	Frame         int
 }
 
+//REF: `"Altis","tempMissionSP","",1.1,999`
 var rvSaveRe *regexp.Regexp = regexp.MustCompile(`"(.*?)","(.*?)","(.*?)",(\d+\.?\d*?),(\d+)`)
 
 func rvSaveHandler(args []string) error {

@@ -14,8 +14,7 @@ type rvFired struct {
 	Position vec2
 }
 
-// example line
-// 0,108,[23931.4,16282.6]
+//REF: `2,50,[24869.5,17037.4]`
 var rvFiredRe *regexp.Regexp = regexp.MustCompile(`(\d+),(\d+),\[(\d+\.?\d*?),(\d+\.?\d*?)\]`)
 
 func rvFiredHandler(args []string) error {

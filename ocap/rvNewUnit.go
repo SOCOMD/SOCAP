@@ -2,6 +2,7 @@ package ocap
 
 import (
 	"errors"
+	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -16,14 +17,17 @@ type rvNewUnit struct {
 	IsPlayer int
 }
 
-// example line
-// 0,0,"ChambersAUS","Alpha 1-1","WEST",1
+//REF: `25,1,"William Johnson","Alpha 1-2","WEST",0`
 var rvNewUnitRe *regexp.Regexp = regexp.MustCompile(`(\d+),(\d+),"(.*?)","(.*?)","(.*?)",(\d)`)
 
 func rvNewUnitHandler(args []string) error {
 	newUnit, err := rvNewUnitParser(strings.Join(args, ","))
 	if err != nil {
 		return err
+	}
+
+	if _, ok := entities[newUnit.ID]; ok == false {
+		return fmt.Errorf("Entity with duplicate ID found")
 	}
 
 	entities[newUnit.ID] = &entityUnit{

@@ -1,11 +1,12 @@
 #include "\userconfig\ocap\config.hpp"
 
 //Settings
-ocap_nameServer = 'Bce';
-ocap_minPlayerCount = 0;
-ocap_frameCaptureDelay = 1;
+ocap_nameServer = 'SOCOMD';
+ocap_minPlayerCount = 1;
+ocap_frameCaptureDelay = 1.5;
 ocap_excludeFromRecord = ["ACE_friesAnchorBar"];
 
+//Vars
 ocap_capture = false;
 ocap_captureFrameNo = 0;
 

@@ -17,8 +17,7 @@ type rvUpdateUnit struct {
 	IsPlayer    int
 }
 
-// example line
-// 0,[24075.3,16291],0,1,0,"ChambersAUS",1
+//REF: `0,[24075.7,16292.1],19,1,0,"ChambersAUS",1`
 var rvUpdateUnitRe *regexp.Regexp = regexp.MustCompile(`(\d+),\[(\d+\.?\d*?),(\d+\.?\d*?)\],(\d+),(\d+),(\d+),"(.*?)",(\d)`)
 
 func rvUpdateUnitHandler(args []string) error {

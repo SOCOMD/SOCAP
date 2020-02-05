@@ -14,8 +14,7 @@ type rvStart struct {
 	CaptureDelay  float64
 }
 
-// example line
-// "Altis","tempMissionSP","",1
+//REF: `"Altis","tempMissionSP","",1`
 var rvStartRe *regexp.Regexp = regexp.MustCompile(`"(.*?)","(.*?)","(.*?)",(\d+)`)
 
 func rvStartHandler(args []string) error {

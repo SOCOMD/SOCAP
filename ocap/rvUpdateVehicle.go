@@ -15,8 +15,7 @@ type rvUpdateVehicle struct {
 	Crew      []int
 }
 
-// example line
-// 1,[24077.6,16301.7,0],0,1,[0,1]
+//REF: `1,[24077.5,16301.7,0],0,1,[]`
 var rvUpdateVehicleRe *regexp.Regexp = regexp.MustCompile(`(\d+),\[(\d+\.?\d*?),(\d+\.?\d*?),(\d+\.?\d*?)\],(\d+),(\d+),\[(.*?)\]`)
 
 func rvUpdateVehicleHandler(args []string) error {
@@ -43,13 +42,12 @@ func rvUpdateVehicleParser(input string) (rvUpdateVehicle, error) {
 		return rvUpdateVehicle{}, errors.New("Bad Input string")
 	}
 
-	// strip match string
 	id, _ := strconv.Atoi(match[1])
 	posX, _ := strconv.ParseFloat(match[2], 64)
 	posY, _ := strconv.ParseFloat(match[3], 64)
 	posZ, _ := strconv.ParseFloat(match[4], 64)
-	dir, _ := strconv.Atoi(match[4])
-	isAlive, _ := strconv.Atoi(match[5])
+	dir, _ := strconv.Atoi(match[5])
+	isAlive, _ := strconv.Atoi(match[6])
 
 	crewStr := strings.Split(match[7], ",")
 	crew := []int{}
