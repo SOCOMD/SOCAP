@@ -29,12 +29,9 @@ func rvTest1() {
 	RVExensionHandle(`:EVENT:`, []string{`0,"connected","William Johnson"`})
 	RVExensionHandle(`:EVENT:`, []string{`45,"hit",0,[1,"M4"],10`})
 	RVExensionHandle(`:EVENT:`, []string{`50,"killed",0,[1,"M4"],15`})
-	RVExensionHandle(`:EVENT:`, []string{`999,"endMission",["",""]`})
 	RVExensionHandle(`:EVENT:`, []string{`999,"disconnected","ChambersAUS"`})
-
-	for _, v := range entities {
-		captureJSON.Entities = append(captureJSON.Entities, v)
-	}
+	RVExensionHandle(`:EVENT:`, []string{`999,"endMission",["",""]`})
+	RVExensionHandle(`:SAVE:`, []string{`"Altis","tempMissionSP","",1.1,999`})
 
 	output, _ := json.Marshal(captureJSON)
 	fmt.Printf("%s\n", output)

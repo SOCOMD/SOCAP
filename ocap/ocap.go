@@ -34,6 +34,7 @@ func RVExensionHandle(funcName string, args []string) string {
 	case ":UPDATE:VEH:":
 		err = rvUpdateVehicleHandler(args)
 	case ":SAVE:":
+		err = rvSaveHandler(args)
 	case ":LOG:":
 	case ":START:":
 		err = rvStartHandler(args)

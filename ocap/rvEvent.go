@@ -240,8 +240,6 @@ func rvEventEndMissionHandler(event rvEvent, input string) error {
 		MissionDescription: endMission.Description,
 	})
 
-	captureJSON.EndFrame = endMission.Fame
-
 	return fmt.Errorf("Unsupported Event")
 }
 
