@@ -24,6 +24,8 @@ func rvStartHandler(args []string) error {
 		return err
 	}
 
+	resetCapture()
+
 	captureJSON.WorldName = start.WorldName
 	captureJSON.MissionName = start.MissionName
 	captureJSON.MissionAuthor = start.MissionAuthor

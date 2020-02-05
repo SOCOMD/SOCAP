@@ -13,10 +13,14 @@ var (
 
 // setup any variables here
 func init() {
-	entities = make(map[int]interface{})
-	captureJSON = capture{}
+	resetCapture()
 
 	rvTest1()
+}
+
+func resetCapture() {
+	entities = make(map[int]interface{})
+	captureJSON = capture{}
 }
 
 func RVExensionHandle(funcName string, args []string) string {
