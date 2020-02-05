@@ -8,15 +8,16 @@
         $error = 1;
     } else {
         // Get list of operations from DB
-        // $req = "SELECT * FROM operations";
-        $req = "SELECT * FROM operations WHERE
-            type LIKE '%".addslashes($_POST['type'])."%' AND
-            mission_name LIKE '%".addslashes($_POST["name"])."%' AND 
-            date <= '".addslashes($_POST['older'])."' AND 
-            date >= '".addslashes($_POST['newer'])."'";
+        $req = "SELECT * FROM operations";
+        // $req = "SELECT * FROM operations WHERE
+        //     type LIKE '%".addslashes($_POST['type'])."%' AND
+        //     mission_name LIKE '%".addslashes($_POST["name"])."%' AND 
+        //     date <= '".addslashes($_POST['older'])."' AND 
+        //     date >= '".addslashes($_POST['newer'])."'";
         $result = $db->query($req);
         //$result = $db->query("SELECT * FROM operations");
         $ops = array();
+        error_log($ops);
         foreach($result as $row) {
             $ops[] = $row;
         }
