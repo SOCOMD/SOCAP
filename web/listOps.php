@@ -17,11 +17,11 @@
         $result = $db->query($req);
         //$result = $db->query("SELECT * FROM operations");
         $ops = array();
-        error_log($ops);
         foreach($result as $row) {
             $ops[] = $row;
         }
-
+        error_log("OpList:");
+        error_log($ops);
         $db = NULL;
     };
 ?>

@@ -5,15 +5,16 @@
 error_reporting(E_ALL);
 ini_set('log_errors', TRUE);
 ini_set('error_log', '/var/tmp/php-error.log');
+ini_set('date.timezone','Australia/Sydney');
 
 
 $debug = false;
-$appTitle = "OCAP";
-$appDesc = "Operation Capture And Playback";
-$appAuthor = "MisterGoodson (aka Goodson [3CB])";
-$ipGameServer = ["195.88.209.214", "193.19.118.241"];
+$appTitle = "SOCAP";
+$appDesc = "Socomd Operation Capture And Playback";
+$appAuthor = "";
+$ipGameServer = ["195.88.209.214", "193.19.118.241","localhost"];
 $allTypeGames = [["Все", ""], ["TvT", "tvt"], ["IF", "if"]];
-$lang = "ru";
+$lang = "en";
 const VERSION = "2.2.1";
 
 // Please do not modify this as these stats help me get a job. Thank-you! :)

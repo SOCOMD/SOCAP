@@ -387,6 +387,7 @@ class UI {
 
 		// Show modal
 		this.showModal();
+    this.setModalOpList();
 		this.modalFilter.style.display = "inherit";
 	};
 
@@ -397,8 +398,9 @@ class UI {
 		var name = filterGameInput.value;
 		var DateNewer = calendar1.value;
 		var DateOlder = calendar2.value;
+    console.log("Called listOps");
 		$.ajax({
-			url: 'ListOps.php',
+			url: 'listOps.php',
 			type : "POST",
 			async : false,
 			cache : false,

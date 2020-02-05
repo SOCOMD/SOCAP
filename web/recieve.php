@@ -84,7 +84,7 @@ if ($option == "addFile") { // Add receieved file to this directory
 		print_debug($serverId);
 
 	} catch (PDOExecption $e) {
-		echo "Exception: ".$e->getMessage();
+		error_log("Exception: ".$e->getMessage());
 	}
 
 	// TODO: Increment capture count on remote database
@@ -93,7 +93,7 @@ if ($option == "addFile") { // Add receieved file to this directory
 		"server_id" => $serverId
 	));
 
-	print_debug($result);
+    print_debug($result);
 } else {
 	echo "Invalid option";
 }
