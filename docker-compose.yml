@@ -5,5 +5,5 @@ services:
     ports: # Expose ports
       - "8080:80"
     volumes: # volumes for persistents
-      - "/var/www/html/data/" # database
-      - "/var/www/html/images/maps/" # maps
+      - "${SOCAP_DATA_DIR}:/var/www/html/data/" # database
+      - "${SOCAP_MAPS_DIR}:/var/www/html/images/maps/" # maps

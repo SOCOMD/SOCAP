@@ -9,6 +9,3 @@ RUN yum -y install php php-mysql php-core php-zip php-zlib php-json \
 # Configuration and installation
 COPY ./.docker/httpd.conf /etc/httpd/conf/httpd.conf
 ADD web /var/www/html/
-
-RUN chmod 777 ./var/www/html/data
-RUN chmod 777 ./var/www/html/images/maps
