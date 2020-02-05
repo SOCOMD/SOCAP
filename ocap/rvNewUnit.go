@@ -2,7 +2,6 @@ package ocap
 
 import (
 	"errors"
-	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -26,10 +25,7 @@ func rvNewUnitHandler(args []string) error {
 		return err
 	}
 
-	if _, ok := entities[newUnit.ID]; ok == false {
-		return fmt.Errorf("Entity with duplicate ID found")
-	}
-
+	entityIDs = append(entityIDs, newUnit.ID)
 	entities[newUnit.ID] = &entityUnit{
 		entity: entity{
 			ID:          newUnit.ID,

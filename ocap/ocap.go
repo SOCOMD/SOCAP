@@ -7,6 +7,7 @@ import (
 )
 
 var (
+	entityIDs   []int
 	entities    map[int]interface{}
 	captureJSON capture
 )
@@ -19,6 +20,7 @@ func init() {
 }
 
 func resetCapture() {
+	entityIDs = []int{}
 	entities = make(map[int]interface{})
 	captureJSON = capture{}
 }

@@ -98,7 +98,7 @@ class Vehicle extends Entity {
 				//console.log(this);
 				//console.log(driver);
 				let icon = this.iconType[driver.sideClass];
-				if (this._realIcon != icon) {
+				if (icon != null && this._realIcon != icon) {
 					this.setMarkerIcon(icon);
 					this._realIcon = icon; // Vehicle icon will now remain this colour until a unit of a differet side becomes driver
 				};

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -34,8 +35,9 @@ func rvSaveHandler(args []string) error {
 	captureJSON.CaptureDelay = save.CaptureDelay
 	captureJSON.EndFrame = save.Frame
 
-	for _, v := range entities {
-		captureJSON.Entities = append(captureJSON.Entities, v)
+	sort.Ints(entityIDs)
+	for _, v := range entityIDs {
+		captureJSON.Entities = append(captureJSON.Entities, entities[v])
 	}
 
 	output, err := json.Marshal(captureJSON)
