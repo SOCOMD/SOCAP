@@ -4,22 +4,24 @@ extern void goRVExtension(char *output, size_t outputSize, char *input);
 extern void goRVExtensionVersion(char *output, size_t outputSize);
 extern void goRVExtensionArgs(char* output, size_t outputSize, char* input, char** argv, int argc);
 
-#if defined(_MSC_VER)
-    //  Microsoft 
-    #define DLL_PUBLIC __declspec(dllexport)
+#if defined(_WIN32) || defined(_WIN64)
+// __declspec(dllexport) void __stdcall _RVExtension(char *output, size_t outputSize, char *input) {
+//   goRVExtension(output, outputSize, input);
+// }
 #else
-    //  GCC
-    #define DLL_PUBLIC __attribute__((visibility("default")))
+// __attribute__((visibility("default"))) void _RVExtension(char *output, size_t outputSize, char *input) {
+//   goRVExtension(output, outputSize, input);
+// }
 #endif
 
-DLL_PUBLIC void _RVExtension(char *output, size_t outputSize, char *input) {
-  goRVExtension(output, outputSize, input);
+void RVExtension(char *output, size_t outputSize, char *input) {
+	goRVExtension(output, outputSize, input);
 }
-
-DLL_PUBLIC void _RVExtensionVersion(char *output, size_t outputSize) {
-  goRVExtensionVersion(output, outputSize);
+ 
+void RVExtensionVersion(char *output, size_t outputSize) {
+	goRVExtensionVersion(output, outputSize);
 }
-
-DLL_PUBLIC void _RVExtensionArgs(char* output, size_t outputSize, char* input, char** argv, int argc) {
-  goRVExtensionArgs(output, outputSize, input, argv, argc);
+ 
+void RVExtensionArgs(char* output, size_t outputSize, char* input, char** argv, int argc) {
+	goRVExtensionArgs(output, outputSize, input, argv, argc);
 }
