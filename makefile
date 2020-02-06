@@ -26,6 +26,11 @@ build-addon:
 build-addon-server:
 	@$$HOME/.local/bin/mikero/makepbo -N ./addon ./bin/socap.pbo
 
+.PHONY: deploy-server
+deploy-server:
+	@cp -f ./bin/socap.pbo /srv/games/servers/arma3_mods/SOCOMD_Core/@socap/addons/socap.pbo; \
+	cp -f ./bin/socap_x64.so /srv/games/servers/arma3_mods/SOCOMD_Core/@socap/socap_x64.so
+
 
 # example make DATA_DIR=$(pwd)/tmp/data MAPS_DIR=$(pwd)/tmp/maps start-website 
 .PHONY: start-website
