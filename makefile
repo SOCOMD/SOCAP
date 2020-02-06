@@ -22,6 +22,10 @@ build-linux64:
 build-addon:
 	@MakePbo.exe -N ./addon ./bin/socap.pbo
 
+.PHONY: build-addon-server
+build-addon-server:
+	@$$HOME/.local/bin/mikero/makepbo -N ./addon ./bin/socap.pbo
+
 
 # example make DATA_DIR=$(pwd)/tmp/data MAPS_DIR=$(pwd)/tmp/maps start-website 
 .PHONY: start-website
