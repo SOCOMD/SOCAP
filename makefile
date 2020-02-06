@@ -8,23 +8,17 @@ __check_defined = \
 
 .PHONY: build-win64
 build-win64:
-	@GOARCH="amd64"; \
-	CGO_ENABLED=1; \
-	go build -o ./bin/socap_x64.dll -buildmode=c-shared .
+	@GOARCH="amd64" CGO_ENABLED=1 go build -o ./bin/socap_x64.dll -buildmode=c-shared .
 	
 
 .PHONY: build-linux64
 build-linux64:
-	@GOARCH="amd64"; \
-	CGO_ENABLED=1; \
-	go build -o ./bin/socap.so -buildmode=c-shared .; \
+	@GOARCH="amd64" CGO_ENABLED=1 go build -o ./bin/socap.so -buildmode=c-shared .; \
 	cp -f ./bin/socap_x64.so /srv/games/servers/arma3_mods/SOCOMD_Core/@socap/socap_x64.so;
 
 .PHONY: build-linux32
 build-linux32:
-	@GOARCH=386; \
-	CGO_ENABLED=1; \
-	go build -o ./bin/socap_x32.so -buildmode=c-shared .;\
+	@GOARCH=386	CGO_ENABLED=1 go build -o ./bin/socap_x32.so -buildmode=c-shared .;\
 	cp -f ./bin/socap_x64.so /srv/games/servers/arma3_mods/SOCOMD_Core/@socap/socap.so;
 
 .PHONY: build-addon
