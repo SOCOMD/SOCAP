@@ -1,5 +1,3 @@
-#include "\userconfig\ocap\config.hpp"
-
 //Settings
 ocap_nameServer = 'SOCOMD';
 ocap_minPlayerCount = 1;
