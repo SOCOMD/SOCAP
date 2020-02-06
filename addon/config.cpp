@@ -56,5 +56,7 @@ class CfgVehicles {
 		
 		_generalMacro = "ModuleEndMissionOCAP";
 		function = "ocap_fnc_moduleEndMission";
+		curatorInfoType = "";
+		curatorInfoTypeEmpty = "";
 	};
 };
