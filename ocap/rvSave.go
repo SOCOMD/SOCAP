@@ -107,7 +107,7 @@ func curlUpload(fn string) error {
 	}
 	defer f.Close()
 
-	url := fmt.Sprintf(`http://127.0.0.1:8080/recieve.php?option=addFile&fileName=%s&secret=%s`, fn, secret)
+	url := fmt.Sprintf(`http://127.0.0.1:9000/recieve.php?option=addFile&fileName=%s&secret=%s`, fn, secret)
 	req, err := http.NewRequest("POST", url, f)
 	if err != nil {
 		return err
@@ -130,7 +130,7 @@ func curlUpdate(fn string) error {
 	missionName := captureJSON.MissionName
 	missionDuration := (int64)(captureJSON.CaptureDelay * (float64)(captureJSON.EndFrame))
 
-	url := fmt.Sprintf(`http://127.0.0.1:8080/recieve.php?option=dbInsert&secret=%s&worldName=%s&missionName=%s&missionDuration=%d&type=coop&filename=%s`, secret, worldName, missionName, missionDuration, fn)
+	url := fmt.Sprintf(`http://127.0.0.1:9000/recieve.php?option=dbInsert&secret=%s&worldName=%s&missionName=%s&missionDuration=%d&type=coop&filename=%s`, secret, worldName, missionName, missionDuration, fn)
 	resp, err := http.Post(url, "", nil)
 	if err != nil {
 		return err
