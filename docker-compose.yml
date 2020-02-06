@@ -3,7 +3,7 @@ services:
   ocap:
     build: . # TODO: replace by docker image name. For now, build because we dont have an image on docker hub (yet)
     ports: # Expose ports
-      - "8080:80"
+      - "9000:80"
     volumes: # volumes for persistents
       - "${SOCAP_DATA_DIR}:/var/www/html/data/" # database
       - "${SOCAP_MAPS_DIR}:/var/www/html/images/maps/" # maps
