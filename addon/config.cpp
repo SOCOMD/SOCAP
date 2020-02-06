@@ -12,7 +12,9 @@ class CfgPatches {
         requiredAddons[] = {"A3_Functions_F",
                             "cba_main" /*TODO: Добавить WMT, SWT*/};
         requiredVersion = REQUIRED_VERSION;
-        units[] = {};
+        units[] = {
+			"ModuleEndMissionOCAP"
+		};
         weapons[] = {};
     };
 };
@@ -50,6 +52,9 @@ class CfgVehicles {
 	class ModuleEndMissionOCAP : ModuleEndMission_F {
 		scope = public;
 		scopeCurator = public;
+		isGlobal = 1;
+		
+		_generalMacro = "ModuleEndMissionOCAP";
 		function = "ocap_fnc_moduleEndMission";
 	};
 };
