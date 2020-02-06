@@ -39,6 +39,10 @@ start-website:
 	@:$(call check_defined, MAPS_DIR)
 	@SOCAP_MAPS_DIR=${MAPS_DIR} SOCAP_DATA_DIR=${DATA_DIR} docker-compose up --build
 
+.PHONY: start-website-prod
+start-website-prod:
+	@SOCAP_MAPS_DIR=/srv/socap/maps SOCAP_DATA_DIR=/srv/socap/data docker-compose up --build
+
 addFile:
 	@:$(call check_defined, FILE_NAME)
 	@:$(call check_defined, FILE)
