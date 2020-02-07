@@ -24,6 +24,10 @@ build-linux32:
 build-addon:
 	@MakePbo.exe -N ./addon ./bin/socap.pbo
 
+.PHONY: build-addon2
+build-addon2:
+	@MakePbo.exe -N ./addonV2 ./bin/socap.pbo
+
 .PHONY: build-addon-server
 build-addon-server:
 	@$$HOME/.local/bin/mikero/makepbo -N ./addon ./bin/socap.pbo; \

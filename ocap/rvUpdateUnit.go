@@ -13,12 +13,11 @@ type rvUpdateUnit struct {
 	Direction   int
 	IsAlive     int
 	IsInVehicle int
-	Name        string
 	IsPlayer    int
 }
 
-//REF: `0,[24075.7,16292.1],19,1,0,"ChambersAUS",1`
-var rvUpdateUnitRe *regexp.Regexp = regexp.MustCompile(`(\d+),\[(\d+\.?\d*?),(\d+\.?\d*?)\],(\d+),(\d+),(\d+),"(.*?)",(\d)`)
+//REF: `0,[24075.7,16292.1],19,1,0,1`
+var rvUpdateUnitRe *regexp.Regexp = regexp.MustCompile(`(\d+),\[(\d+\.?\d*?),(\d+\.?\d*?)\],(\d+),(\d+),(\d+),(\d)`)
 
 func rvUpdateUnitHandler(args []string) error {
 	update, err := rvUpdateUnitParser(strings.Join(args, ","))
@@ -32,7 +31,7 @@ func rvUpdateUnitHandler(args []string) error {
 		Direction:   update.Direction,
 		IsAlive:     update.IsAlive,
 		IsInVehicle: update.IsInVehicle,
-		Name:        update.Name,
+		Name:        unit.Name,
 		IsPlayer:    update.IsPlayer,
 	})
 	entities[update.ID] = unit
@@ -42,7 +41,7 @@ func rvUpdateUnitHandler(args []string) error {
 
 func rvUpdateUnitParser(input string) (rvUpdateUnit, error) {
 	match := rvUpdateUnitRe.FindStringSubmatch(input)
-	if len(match) < 9 {
+	if len(match) < 8 {
 		return rvUpdateUnit{}, errors.New("Bad Input string")
 	}
 
@@ -53,7 +52,7 @@ func rvUpdateUnitParser(input string) (rvUpdateUnit, error) {
 	dir, _ := strconv.Atoi(match[4])
 	isAlive, _ := strconv.Atoi(match[5])
 	isInVehicle, _ := strconv.Atoi(match[6])
-	isPlayer, _ := strconv.Atoi(match[8])
+	isPlayer, _ := strconv.Atoi(match[7])
 
 	return rvUpdateUnit{
 		ID: id,
@@ -64,7 +63,6 @@ func rvUpdateUnitParser(input string) (rvUpdateUnit, error) {
 		Direction:   dir,
 		IsAlive:     isAlive,
 		IsInVehicle: isInVehicle,
-		Name:        match[7],
 		IsPlayer:    isPlayer,
 	}, nil
 }
