@@ -38,7 +38,7 @@ start-website:
 
 .PHONY: start-website-prod
 start-website-prod:
-	@SOCAP_MAPS_DIR=/srv/socap/maps SOCAP_DATA_DIR=/srv/socap/data docker-compose up --build
+	@SOCAP_MAPS_DIR=/srv/socap/maps SOCAP_DATA_DIR=/srv/socap/data docker-compose up --build -d
 
 addFile:
 	@:$(call check_defined, FILE_NAME)
