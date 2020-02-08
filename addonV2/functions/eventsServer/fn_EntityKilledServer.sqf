@@ -1,5 +1,10 @@
 params ["_unit", "_killer", "_instigator", "_useEffects"];
 
+if(!(local _unit) exitWith {
+	_clientID = owner _unit;
+	_this remoteExec ["socap_fnc_EntityKilledServer", _clientID];
+};
+
 if (isNull _instigator) then {_instigator = UAVControl vehicle _killer select 0}; // UAV/UGV player operated road kill
 if (isNull _instigator) then {_instigator = _killer};
 if ((isNull _instigator) || (_instigator == _unit)) then {_instigator = _unit getVariable ["ace_medical_lastDamageSource", _unit]};
