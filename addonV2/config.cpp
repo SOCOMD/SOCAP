@@ -3,6 +3,7 @@
 class CfgPatches {
     class socap {
         name = "socap";
+		versionStr = "1.0.0";
 
         requiredAddons[] = {
 			"A3_Functions_F",
