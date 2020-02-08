@@ -17,53 +17,77 @@ var (
 	tempDir string
 	logFile *os.File
 	logger  *log.Logger
+	dataBus chan extData
 )
+
+type extData struct {
+	FuncName string
+	Args     []string
+}
 
 // setup any variables here
 func init() {
 	tempDir, _ = ioutil.TempDir("", "socap")
 	setupLogger()
 	resetCapture()
+	dataBus = make(chan extData)
 }
 
 func resetCapture() {
 	entityIDs = []int{}
 	entities = make(map[int]interface{})
 	captureJSON = capture{}
+	go handleLoop()
 }
 
 func RVExensionHandle(funcName string, args []string) string {
+	dataBus <- extData{
+		FuncName: funcName,
+		Args:     args,
+	}
+	return ""
+}
+
+func handleLoop() {
 	var err error = errors.New("Not Handled")
 
-	switch funcName {
-	case ":NEW:UNIT:":
-		err = rvNewUnitHandler(args)
-	case ":NEW:VEH:":
-		err = rvNewVehicleHandler(args)
-	case ":EVENT:":
-		err = rvEventHandler(args)
-	case ":UPDATE:UNIT:":
-		err = rvUpdateUnitHandler(args)
-	case ":UPDATE:VEH:":
-		err = rvUpdateVehicleHandler(args)
-	case ":SAVE:":
-		err = rvSaveHandler(args)
-	case ":LOG:":
-	case ":START:":
-		err = rvStartHandler(args)
-	case ":FIRED:":
-		err = rvFiredHandler(args)
-	default:
-		err = errors.New("Not Known")
-	}
+	for {
+		select {
+		case data, ok := <-dataBus:
+			if !ok {
+				// channel is busto lets exit
+				logger.Print("ERR: Channel busted, exiting\n")
+				return
+			}
+			funcName, args := data.FuncName, data.Args
+			switch funcName {
+			case ":NEW:UNIT:":
+				err = rvNewUnitHandler(args)
+			case ":NEW:VEH:":
+				err = rvNewVehicleHandler(args)
+			case ":EVENT:":
+				err = rvEventHandler(args)
+			case ":UPDATE:UNIT:":
+				err = rvUpdateUnitHandler(args)
+			case ":UPDATE:VEH:":
+				err = rvUpdateVehicleHandler(args)
+			case ":SAVE:":
+				err = rvSaveHandler(args)
+			case ":LOG:":
+			case ":START:":
+				err = rvStartHandler(args)
+			case ":FIRED:":
+				err = rvFiredHandler(args)
+			default:
+				err = errors.New("Not Known")
+			}
 
-	if err != nil {
-		logger.Printf("ERR: %s, Func: %s, Args: %s\n", err, funcName, strings.Join(args, ","))
-		return err.Error()
+			if err != nil {
+				logger.Printf("ERR: %s, Func: %s, Args: %s\n", err, funcName, strings.Join(args, ","))
+			}
+			logger.Printf("Func: %s, Args: %s\n", funcName, strings.Join(args, ","))
+		}
 	}
-
-	logger.Printf("Func: %s, Args: %s\n", funcName, strings.Join(args, ","))
-	return ""
 }
 
 func setupLogger() {
