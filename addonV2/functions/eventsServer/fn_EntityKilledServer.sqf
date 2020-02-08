@@ -1,4 +1,10 @@
-params ["_unit", "_killer", "_instigator", "_useEffects", ["_frame", socap_global_frame]];
+params ["_unit", "_killer", "_instigator", "_useEffects", ["_frame", -1]];
+
+if(isServer) then {
+	_frame = socap_global_frame;
+};
+
+if(_frame < 0) exitWith {};
 
 if(!(local _unit)) exitWith {
 	_clientID = owner _unit;
