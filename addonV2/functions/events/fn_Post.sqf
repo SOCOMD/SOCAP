@@ -1,7 +1,5 @@
 params ["_func", "_args"];
 
-if(!socap_global_captureEnabled) exitWith {};
-
 if(isServer) then {
 	_this call socap_fnc_PostServer;
 } else {
