@@ -24,7 +24,7 @@ if(_entity isKindOf "Man") then {
 	if(name _entity == "") exitWith {
 		_valid = 0;
 	};
-}
+};
 
 if(_valid == 0) exitWith {};
 
