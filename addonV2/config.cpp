@@ -9,7 +9,10 @@ class CfgPatches {
             "cba_main"
 		};
 
-        units[] = {};
+        units[] = {
+			"ModuleEndMissionOCAP"
+		};
+		
         weapons[] = {};
     };
 };

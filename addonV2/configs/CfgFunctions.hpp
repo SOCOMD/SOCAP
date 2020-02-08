@@ -3,6 +3,7 @@ class CfgFunctions {
 		class Events {
 			file="\socap\functions\events";
 			class CaptureEnd {};
+			class EntityCreate {};
 			class EntityFired {};
 			class EntityHit {};
 			class Post {};

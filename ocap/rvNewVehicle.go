@@ -29,6 +29,7 @@ func rvNewVehicleHandler(args []string) error {
 			ID:          newVehicle.ID,
 			Type:        "vehicle",
 			Name:        newVehicle.Name,
+			StartFrame:  newVehicle.Frame,
 			FramesFired: []eventFire{},
 		},
 		Class:     newVehicle.Class,

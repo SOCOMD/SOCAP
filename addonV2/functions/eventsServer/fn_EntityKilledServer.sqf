@@ -1,6 +1,6 @@
 params ["_unit", "_killer", "_instigator", "_useEffects"];
 
-if(!(local _unit) exitWith {
+if(!(local _unit)) exitWith {
 	_clientID = owner _unit;
 	_this remoteExec ["socap_fnc_EntityKilledServer", _clientID];
 };
