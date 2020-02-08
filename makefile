@@ -47,6 +47,6 @@ addFile:
 	@:$(call check_defined, INFO_WORLD)
 	@:$(call check_defined, INFO_DURATION)
 	@:$(call check_defined, SECRET)
-	curl -vX POST -H "Content-Type: application/json" http://localhost:8080/recieve.php?option=addFile\&fileName=${FILE_NAME}\&secret=${SECRET} -d @${FILE}
-	curl -vX POST http://localhost:8080/recieve.php?option=dbInsert\&secret=${SECRET}\&worldName=${INFO_WORLD}\&missionName=${INFO_NAME}\&missionDuration=${INFO_DURATION}\&type=coop\&filename=${FILE_NAME}
+	curl -vX POST -H "Content-Type: application/json" http://localhost:9000/recieve.php?option=addFile\&fileName=${FILE_NAME}\&secret=${SECRET} -d @${FILE}
+	curl -vX POST http://localhost:9000/recieve.php?option=dbInsert\&secret=${SECRET}\&worldName=${INFO_WORLD}\&missionName=${INFO_NAME}\&missionDuration=${INFO_DURATION}\&type=coop\&filename=${FILE_NAME}
 
