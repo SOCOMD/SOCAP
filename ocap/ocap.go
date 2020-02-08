@@ -30,7 +30,12 @@ func init() {
 	tempDir, _ = ioutil.TempDir("", "socap")
 	setupLogger()
 	resetCapture()
-	dataBus = make(chan extData)
+	// shouldn't need a buffer, but with a time step of 1 second
+	// 1000 items is ~16m of data. for an average operation of
+	// 1.5 hours if the compute can not keep up this buffer should
+	// be more than enough to handle high load periods.
+	// (cbf to rewrite the entire addon to allow full concurency and out of order processing)
+	dataBus = make(chan extData, 1000)
 }
 
 func resetCapture() {
