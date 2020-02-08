@@ -32,5 +32,10 @@ class CfgFunctions {
 			class MainLoop {};
 			class ProcessEvents {};
 		};
+
+		class Modules {
+			file="\socap\functions\modules";
+			class ModuleEndMission {};
+		};
 	};
 };
