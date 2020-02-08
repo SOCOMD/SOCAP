@@ -5,6 +5,6 @@ addMissionEventHandler["HandleDisconnect", {_this spawn socap_fnc_PlayerDisconne
 addMissionEventHandler["EntityKilled", {_this spawn socap_fnc_EntityKilled;}];
 addMissionEventHandler["Ended", { _this call socap_fnc_CaptureEnd;}];
 
-["socap_processEvents", "onEachFrame", {_this call socap_fnc_ProcessEvents;}] call BIS_fnc_addStackedEventHandler;
+//["socap_processEvents", "onEachFrame", {_this call socap_fnc_ProcessEvents;}] call BIS_fnc_addStackedEventHandler;
 
 [] spawn socap_fnc_MainLoop;
