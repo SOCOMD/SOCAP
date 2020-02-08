@@ -22,7 +22,7 @@ build-linux32:
 
 .PHONY: build-addon
 build-addon:
-	@MakePbo.exe -N ./addon ./bin/socap.pbo
+	@MakePbo.exe -N ./addonV2 ./bin/socap.pbo
 
 .PHONY: build-addon-server
 build-addon-server:
