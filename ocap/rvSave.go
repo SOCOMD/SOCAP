@@ -1,12 +1,12 @@
 package ocap
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
-	"os"
-	"path/filepath"
 	"regexp"
 	"sort"
 	"strconv"
@@ -43,12 +43,13 @@ func rvSaveHandler(args []string) error {
 	}
 
 	fn := fmt.Sprintf("%d_socap.json", time.Now().Unix())
-	err = curlSave(fn)
+	buf := bytes.Buffer{}
+	err = json.NewEncoder(&buf).Encode(captureJSON)
 	if err != nil {
 		return err
 	}
 
-	err = curlUpload(fn)
+	err = curlUpload(fn, &buf)
 	if err != nil {
 		return err
 	}
@@ -80,39 +81,14 @@ func rvSaveParser(input string) (rvSave, error) {
 	}, nil
 }
 
-func curlSave(fn string) error {
-	tmpfn := filepath.Join(tempDir, fn)
-	output, err := json.Marshal(captureJSON)
-	if err != nil {
-		return err
-	}
-
-	f, err := os.Create(tmpfn)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-	f.WriteString(string(output))
-
-	return nil
-}
-
-func curlUpload(fn string) error {
+func curlUpload(fn string, r io.Reader) error {
 	secret := "uid10t"
 
-	tmpfn := filepath.Join(tempDir, fn)
-	f, err := os.Open(tmpfn)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
 	url := fmt.Sprintf(`http://127.0.0.1:9000/recieve.php?option=addFile&fileName=%s&secret=%s`, fn, secret)
-	req, err := http.NewRequest("POST", url, f)
+	req, err := http.NewRequest("POST", url, r)
 	if err != nil {
 		return err
 	}
-
 	req.Header.Set("Content-Type", "application/json")
 
 	resp, err := http.DefaultClient.Do(req)
