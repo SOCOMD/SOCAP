@@ -57,6 +57,9 @@ func handleLoop() {
 	var err error = errors.New("Not Handled")
 
 	for {
+		if logger == nil {
+			setupLogger()
+		}
 		select {
 		case data, ok := <-dataBus:
 			if !ok {
@@ -92,6 +95,7 @@ func handleLoop() {
 			}
 			logger.Printf("Func: %s, Args: %s\n", funcName, strings.Join(args, ","))
 		}
+		logFile.Sync()
 	}
 }
 

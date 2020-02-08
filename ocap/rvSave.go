@@ -59,6 +59,7 @@ func rvSaveHandler(args []string) error {
 		return err
 	}
 
+	resetCapture()
 	teardownLogger()
 
 	return nil
