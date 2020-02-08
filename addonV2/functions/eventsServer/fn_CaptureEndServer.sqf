@@ -7,4 +7,6 @@ _description = "";
 [":EVENT:", [_frame, "endMission", [_sideWon, _description]]] call socap_fnc_Post;
 [":SAVE:", [worldName, briefingName, _author, FRAME_INTERVAL, _frame]] call socap_fnc_Post;
 
-missionNamespace setVariable["socap_capture_enabled", false, true];
+socap_global_captureEnabled = false;
+socap_global_entity_id = 0;
+socap_global_frame = 0;

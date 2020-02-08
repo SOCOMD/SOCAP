@@ -17,6 +17,8 @@ if(_entity isKindOf "Man") then {
 	if(alive _entity) then {
 		if(_entity getVariable ["ACE_isUnconscious", false]) then {
 			_isAlive = 1;
+		} else {
+			_isAlive = 2;
 		};
 	};
 

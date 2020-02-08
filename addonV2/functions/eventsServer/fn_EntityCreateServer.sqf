@@ -25,9 +25,8 @@ if(_entity isKindOf "Man") then {
 if(_valid == 0) exitWith {};
 
 waitUntil {
-	missionNamespace getVariable["socap_capture_enabled", false];
+	socap_global_captureEnabled;
 };
-
 
 _id = socap_global_entity_id;
 socap_global_entity_id = socap_global_entity_id + 1;
@@ -54,8 +53,8 @@ if(_entity isKindOf "Man") then {
 	[":NEW:VEH:",[_frame, _id, _class, _name], true] call socap_fnc_Post;
 };
 
-_entity addEventHandler["Fired", {_this remoteExec ["socap_fnc_EntityFiredServer", 2];}];
-_entity addEventHandler["Hit", {_this remoteExec ["socap_fnc_EntityHitServer", 2];}];
+_entity addEventHandler["Fired", {_this spawn socap_fnc_EntityFired;}];
+_entity addEventHandler["Hit", {_this spawn socap_fnc_EntityHit;}];
 
 _entities = missionNamespace getVariable["socap_entities", []];
 _entities append [_entity];

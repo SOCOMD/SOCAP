@@ -1,7 +1,6 @@
 params ["_func", "_args"];
 
-_captureEnabled = missionNamespace getVariable["socap_capture_enabled", false];
-if(!_captureEnabled) exitWith {};
+if(!socap_global_captureEnabled) exitWith {};
 
 if(isServer) then {
 	_this call socap_fnc_PostServer;
