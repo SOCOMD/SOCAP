@@ -8,6 +8,7 @@ class CfgFunctions {
 		class EventsServer {
 			file="\socap\functions\eventsServer";
 			class CaptureStartServer {};
+			class CaptureEndServer {};
 			class EntityCreateServer {};
 			class EntityFiredServer {};
 			class EntityHitServer {};
