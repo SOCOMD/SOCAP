@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"regexp"
 	"sort"
 	"strconv"
@@ -85,8 +86,8 @@ func rvSaveParser(input string) (rvSave, error) {
 func curlUpload(fn string, r io.Reader) error {
 	secret := "uid10t"
 
-	url := fmt.Sprintf(`http://127.0.0.1:9000/recieve.php?option=addFile&fileName=%s&secret=%s`, fn, secret)
-	req, err := http.NewRequest("POST", url, r)
+	url, _ := url.Parse(fmt.Sprintf(`http://127.0.0.1:9000/recieve.php?option=addFile&fileName=%s&secret=%s`, fn, secret))
+	req, err := http.NewRequest("POST", url.String(), r)
 	if err != nil {
 		return err
 	}
@@ -107,8 +108,8 @@ func curlUpdate(fn string) error {
 	missionName := captureJSON.MissionName
 	missionDuration := (int64)(captureJSON.CaptureDelay * (float64)(captureJSON.EndFrame))
 
-	url := fmt.Sprintf(`http://127.0.0.1:9000/recieve.php?option=dbInsert&secret=%s&worldName=%s&missionName=%s&missionDuration=%d&type=coop&filename=%s`, secret, worldName, missionName, missionDuration, fn)
-	resp, err := http.Post(url, "", nil)
+	url, _ := url.Parse(fmt.Sprintf(`http://127.0.0.1:9000/recieve.php?option=dbInsert&secret=%s&worldName=%s&missionName=%s&missionDuration=%d&type=coop&filename=%s`, secret, worldName, missionName, missionDuration, fn))
+	resp, err := http.Post(url.String(), "", nil)
 	if err != nil {
 		return err
 	}
