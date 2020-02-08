@@ -2,7 +2,7 @@ params ["_unit", "_killer", "_instigator", "_useEffects", ["_frame", socap_globa
 
 if(!(local _unit)) exitWith {
 	_clientID = owner _unit;
-	[_unit, _killer, _instigator, _useEffects, _frame]	_this remoteExec ["socap_fnc_EntityKilledServer", _clientID];
+	[_unit, _killer, _instigator, _useEffects, _frame] remoteExec ["socap_fnc_EntityKilledServer", _clientID];
 };
 
 if (isNull _instigator) then {_instigator = UAVControl vehicle _killer select 0}; // UAV/UGV player operated road kill
