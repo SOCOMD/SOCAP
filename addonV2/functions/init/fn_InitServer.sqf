@@ -1,9 +1,9 @@
 if(!isServer) exitWith {};
 
-addMissionEventHandler["PlayerConnected", {_this spawn socap_fnc_PlayerConnect;}];
-addMissionEventHandler["HandleDisconnect", {_this spawn socap_fnc_PlayerDisconnect;}];
-addMissionEventHandler["EntityKilled", {_this spawn socap_fnc_EntityKilled;}];
-addMissionEventHandler["Ended", { _this call socap_fnc_CaptureEnd;}];
+addMissionEventHandler["PlayerConnected", {_this spawn socap_fnc_PlayerConnectServer;}];
+addMissionEventHandler["HandleDisconnect", {_this spawn socap_fnc_PlayerDisconnectServer;}];
+addMissionEventHandler["EntityKilled", {_this spawn socap_fnc_EntityKilledServer;}];
+addMissionEventHandler["Ended", { _this call socap_fnc_CaptureEndServer;}];
 
 //["socap_processEvents", "onEachFrame", {_this call socap_fnc_ProcessEvents;}] call BIS_fnc_addStackedEventHandler;
 

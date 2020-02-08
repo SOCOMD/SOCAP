@@ -3,15 +3,18 @@ class CfgFunctions {
 		class Events {
 			file="\socap\functions\events";
 			class CaptureEnd {};
-			class CaptureStart {};
-			class EntityCreate {};
-			class EntityFired {};
-			class EntityHit {};
-			class EntityKilled {};
-			class EntityUpdatePosition {};
-			class PlayerConnect {};
-			class PlayerDisconnect {};
 			class Post {};
+		};	
+		class EventsServer {
+			file="\socap\functions\eventsServer";
+			class CaptureStartServer {};
+			class EntityCreateServer {};
+			class EntityFiredServer {};
+			class EntityHitServer {};
+			class EntityKilledServer {};
+			class EntityUpdatePositionServer {};
+			class PlayerConnectServer {};
+			class PlayerDisconnectServer {};
 			class PostServer {};
 		};
 

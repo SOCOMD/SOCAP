@@ -1,11 +1,10 @@
 #include "\socap\predefined.hpp"
 
-[] call socap_fnc_CaptureStart;
+[] call socap_fnc_CaptureStartServer;
 
 missionNamespace setVariable["socap_capture_enabled", true, true];
 _captureEnabled = missionNamespace getVariable["socap_capture_enabled", false];
 _frameTimer = 0.0;
-_frameCount = 0;
 _frameInterval = FRAME_INTERVAL;
 
 ["socap_dt"] call BIS_fnc_deltaTime;
@@ -16,13 +15,12 @@ while { _captureEnabled } do {
 		_frameTimer = _frameTimer - _dt;
 	} else {
 		//Update Frame Count
-		_frameCount = _frameCount + 1;
-		missionNamespace setVariable["socap_frame", _frameCount, true];
+		socap_global_frame = socap_global_frame + 1;
 
 		//Update Entity Positions
 		_entities = missionNamespace getVariable["socap_entities", []];
 		{
-			[_x, _frameCount] call socap_fnc_EntityUpdatePosition;
+			[_x, socap_global_frame] call socap_fnc_EntityUpdatePositionServer;
 		} forEach _entities;
 
 		_frameTimer = _frameInterval;

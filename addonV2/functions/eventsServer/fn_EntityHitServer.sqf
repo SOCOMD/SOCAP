@@ -6,7 +6,7 @@ if(_unitID < 0) exitWith {};
 _sourceID = _source getVariable["socap_entity_id", -1];
 if(_sourceID < 0) exitWith {};
 
-_frame = missionNamespace getVariable["socap_frame", 0];
+_frame = socap_global_frame;
 _sourceWeapon = getText (configFile >> "CfgWeapons" >> currentWeapon _source >> "displayName");
 _distance = round (_unit distance _source);
 

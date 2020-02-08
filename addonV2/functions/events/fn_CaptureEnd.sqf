@@ -1,10 +1,5 @@
-#include "\socap\predefined.hpp"
-
-_frame = missionNamespace getVariable["socap_frame", 0];
-_sideWon = str sideEmpty;
-_author = getMissionConfigValue ["author", ""];
-_description = "";
-[":EVENT:", [_frame, "endMission", [_sideWon, _description]]] call socap_fnc_Post;
-[":SAVE:", [worldName, briefingName, _author, FRAME_INTERVAL, _frame]] call socap_fnc_Post;
-
-missionNamespace setVariable["socap_capture_enabled", false, true];
+if(isServer) {
+	[] call socap_fnc_CaptureEndServer;
+} else {
+	[] remoteExec ["socap_fnc_CaptureEndServer", 2];
+}
