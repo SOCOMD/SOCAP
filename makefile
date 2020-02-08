@@ -24,13 +24,9 @@ build-linux32:
 build-addon:
 	@MakePbo.exe -N ./addon ./bin/socap.pbo
 
-.PHONY: build-addon2
-build-addon2:
-	@MakePbo.exe -N ./addonV2 ./bin/socap.pbo
-
 .PHONY: build-addon-server
 build-addon-server:
-	@$$HOME/.local/bin/mikero/makepbo -N ./addon ./bin/socap.pbo; \
+	@$$HOME/.local/bin/mikero/makepbo -N ./addonV2 ./bin/socap.pbo; \
 	cp -f ./bin/socap.pbo /srv/games/servers/arma3_mods/SOCOMD_Core/@socap/addons/socap.pbo;
 
 # example make DATA_DIR=$(pwd)/tmp/data MAPS_DIR=$(pwd)/tmp/maps start-website 

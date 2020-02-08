@@ -1,6 +1,6 @@
 private _getClass = {
 	if (_this isKindOf "Truck_F") exitWith {"truck"}; // Should be higher than Car
-	if (_this call _isKindOfApc) exitWith {"apc"};
+	if (_this isKindOf "Wheeled_APC_F") exitWith {"apc"}; // Should be higher than Car
 	if (_this isKindOf "Car") exitWith {"car"};
 	if (_this isKindOf "Tank") exitWith {"tank"};
 	if (_this isKindOf "StaticMortar") exitWith {"static-mortar"};
@@ -24,6 +24,10 @@ if(_entity isKindOf "Man") then {
 
 if(_valid == 0) exitWith {};
 
+waitUntil {
+	missionNamespace getVariable["socap_capture_enabled", false];
+};
+
 _id = missionNamespace getVariable["socap_entity_id", 0];
 missionNamespace setVariable["socap_entity_id", _id + 1, true];
 _frame = missionNamespace getVariable["socap_frame", 0];
@@ -39,14 +43,14 @@ if(_entity isKindOf "Man") then {
 	};
 
 	_entity setVariable["socap_entity_id", _id, true];
-	[":NEW:UNIT:",[_frame, _id, _name, _groupID, _side, _isPlayer]] call socap_fnc_Post;
+	[":NEW:UNIT:",[_frame, _id, _name, _groupID, _side, _isPlayer], true] call socap_fnc_Post;
 } else {
 	_vehType = typeOf _entity;
 	_class = _vehType call _getClass;
 	_name = getText (configFile >> "CfgVehicles" >> _vehType >> "displayName");
 
 	_entity setVariable["socap_entity_id", _id, true];
-	[":NEW:VEH:",[_frame, _id, _class, _name]] call socap_fnc_Post;
+	[":NEW:VEH:",[_frame, _id, _class, _name], true] call socap_fnc_Post;
 };
 
 _entity addEventHandler["Fired", {_this spawn socap_fnc_EntityFired}];
