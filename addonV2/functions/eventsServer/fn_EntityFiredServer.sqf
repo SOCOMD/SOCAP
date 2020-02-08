@@ -3,7 +3,7 @@ params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projecti
 _id = _unit getVariable["socap_entity_id", -1];
 if(_id < 0) exitWith {};
 
-_frame = missionNamespace getVariable["socap_frame", 0];
+_frame = socap_global_frame;
 _pos = getPosATL _projectile;
 
 _lastPos = [];
