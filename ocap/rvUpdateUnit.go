@@ -24,8 +24,14 @@ func rvUpdateUnitHandler(args []string) error {
 	if err != nil {
 		return err
 	}
+	if _, ok := entities[update.ID]; !ok {
+		return errors.New(string(update.ID) + " Does not exist, can't update")
+	}
 
-	unit := entities[update.ID].(*entityUnit)
+	unit, ok := entities[update.ID].(*entityUnit)
+	if !ok {
+		return errors.New(string(update.ID) + " Can not type cast to entityUnit")
+	}
 	unit.Positions = append(unit.Positions, eventPositionUnit{
 		Position:    update.Position,
 		Direction:   update.Direction,
@@ -35,8 +41,8 @@ func rvUpdateUnitHandler(args []string) error {
 		IsPlayer:    update.IsPlayer,
 	})
 	entities[update.ID] = unit
-
 	return nil
+
 }
 
 func rvUpdateUnitParser(input string) (rvUpdateUnit, error) {
