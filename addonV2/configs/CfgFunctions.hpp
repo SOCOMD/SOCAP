@@ -28,15 +28,21 @@ class CfgFunctions {
 			class InitServer { preInit = 1; };
 		};
 
+		class Modules {
+			file="\socap\functions\modules";
+			class ModuleEndMission {};
+		};
+
 		class Systems {
 			file="\socap\functions\systems";
 			class MainLoop {};
 			class ProcessEvents {};
 		};
 
-		class Modules {
-			file="\socap\functions\modules";
-			class ModuleEndMission {};
+		class Utils {
+			file="\socap\functions\utils";
+			class GetEntityClass {};
+			class ValidateEntity {};
 		};
 	};
 };
