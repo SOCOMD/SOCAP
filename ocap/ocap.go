@@ -35,14 +35,16 @@ func init() {
 	// 1.5 hours if the compute can not keep up this buffer should
 	// be more than enough to handle high load periods.
 	// (cbf to rewrite the entire addon to allow full concurency and out of order processing)
-	dataBus = make(chan extData, 1000)
+	if dataBus == nil {
+		dataBus = make(chan extData, 1000)
+		go handleLoop()
+	}
 }
 
 func resetCapture() {
 	entityIDs = []int{}
 	entities = make(map[int]interface{})
 	captureJSON = capture{}
-	go handleLoop()
 }
 
 func RVExensionHandle(funcName string, args []string) string {
@@ -64,7 +66,7 @@ func handleLoop() {
 		case data, ok := <-dataBus:
 			if !ok {
 				// channel is busto lets exit
-				logger.Print("ERR: Channel busted, exiting\n")
+				logger.Print("Channel busted, exiting\n")
 				return
 			}
 			funcName, args := data.FuncName, data.Args
