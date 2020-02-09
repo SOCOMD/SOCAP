@@ -17,7 +17,9 @@ while { socap_global_captureEnabled } do {
 		//Update Entity Positions
 		_entities = missionNamespace getVariable["socap_entities", []];
 		{
-			[_x, socap_global_frame] call socap_fnc_EntityUpdatePositionServer;
+			if(!(isNull _x)) then {
+				[_x, socap_global_frame] call socap_fnc_EntityUpdatePositionServer;
+			};
 		} forEach _entities;
 
 		_frameTimer = _frameInterval;
