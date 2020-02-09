@@ -26,7 +26,6 @@ if(_entity isKindOf "Man") then {
 	[":NEW:UNIT:",[_frame, _id, _name, _groupID, _side, _isPlayer], true] call socap_fnc_Post;
 } else {
 	_vehType = typeOf _entity;
-	_class = _vehType call _getClass;
 	_name = getText (configFile >> "CfgVehicles" >> _vehType >> "displayName");
 	_entity setVariable["socap_entity_id", _id, true];
 	[":NEW:VEH:",[_frame, _id, _class, _name], true] call socap_fnc_Post;
