@@ -4,6 +4,7 @@ class CfgFunctions {
 			file="\socap\functions\events";
 			class CaptureEnd {};
 			class EntityCreate {};
+			class EntityDeleted {};
 			class EntityFired {};
 			class EntityHit {};
 			class Post {};
@@ -13,6 +14,7 @@ class CfgFunctions {
 			class CaptureStartServer {};
 			class CaptureEndServer {};
 			class EntityCreateServer {};
+			class EntityDeletedServer {};
 			class EntityFiredServer {};
 			class EntityHitServer {};
 			class EntityKilledServer {};

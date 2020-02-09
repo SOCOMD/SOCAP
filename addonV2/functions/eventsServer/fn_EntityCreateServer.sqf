@@ -12,7 +12,7 @@ _id = socap_global_entity_id;
 socap_global_entity_id = socap_global_entity_id + 1;
 _frame = socap_global_frame;
 
-if(_entity isKindOf "Man") then {
+if(_entity isKindOf "CAManBase") then {
 	_name = name _entity;
 	_groupID = groupID (group _entity);
 	_side = str side _entity;
@@ -31,9 +31,14 @@ if(_entity isKindOf "Man") then {
 	[":NEW:VEH:",[_frame, _id, _class, _name], true] call socap_fnc_Post;
 };
 
+_entity addEventHandler["Deleted", {_this spawn socap_fnc_EntityDeleted;}];
 _entity addEventHandler["Fired", {_this spawn socap_fnc_EntityFired;}];
 _entity addEventHandler["Hit", {_this spawn socap_fnc_EntityHit;}];
 
 _entities = missionNamespace getVariable["socap_entities", []];
 _entities append [_entity];
-missionNamespace setVariable["socap_entities", _entities, true];
+missionNamespace setVariable["socap_entities", _entities];
+
+_entities = missionNamespace getVariable["socap_entities", []];
+_msg = format["%1", _entities];
+_msg remoteExec ["systemChat", _msg];

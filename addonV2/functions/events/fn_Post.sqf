@@ -9,4 +9,4 @@ if(isServer) then {
 // Push events to the stack
 //_stack = missionNamespace getVariable["socap_stack", []];
 //_stack pushBack _this;
-//missionNamespace setVariable["socap_stack", _stack, true];
+//missionNamespace setVariable["socap_stack", _stack];
