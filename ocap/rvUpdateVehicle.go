@@ -24,7 +24,13 @@ func rvUpdateVehicleHandler(args []string) error {
 		return err
 	}
 
-	vehicle := entities[update.ID].(*entityVehicle)
+	if _, ok := entities[update.ID]; !ok {
+		return errors.New(string(update.ID) + " Does not exist, can't update")
+	}
+	vehicle, ok := entities[update.ID].(*entityVehicle)
+	if !ok {
+		return errors.New(string(update.ID) + " Can not type cast to entityVehicle")
+	}
 	vehicle.Positions = append(vehicle.Positions, eventPositionVehicle{
 		Position:  update.Position,
 		Direction: update.Direction,
@@ -32,7 +38,6 @@ func rvUpdateVehicleHandler(args []string) error {
 		Crew:      update.Crew,
 	})
 	entities[update.ID] = vehicle
-
 	return nil
 }
 

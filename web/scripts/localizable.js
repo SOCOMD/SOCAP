@@ -97,7 +97,7 @@ let _localizable = {
 	},
 	"durability": {
 		"ru": "Длительность",
-		"en": "Durability"
+		"en": "Duration"
 	},
 	"list_compilation": {
 		"ru": "Составления списка...",
