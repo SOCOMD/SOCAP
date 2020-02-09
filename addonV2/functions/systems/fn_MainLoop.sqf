@@ -22,9 +22,6 @@ while { socap_global_captureEnabled } do {
 			};
 		} forEach _entities;
 
-		_msg = format["Updated %1 Entities", count _entities];
-		_msg remoteExec ["systemChat", 0];
-
 		_frameTimer = _frameInterval;
 	};
 };

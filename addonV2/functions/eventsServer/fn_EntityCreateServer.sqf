@@ -38,7 +38,3 @@ _entity addEventHandler["Hit", {_this spawn socap_fnc_EntityHit;}];
 _entities = missionNamespace getVariable["socap_entities", []];
 _entities append [_entity];
 missionNamespace setVariable["socap_entities", _entities];
-
-_entities = missionNamespace getVariable["socap_entities", []];
-_msg = format["%1", _entities];
-_msg remoteExec ["systemChat", _msg];
