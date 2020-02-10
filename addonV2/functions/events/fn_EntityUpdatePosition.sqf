@@ -1,11 +1,8 @@
 params["_entity", ["_frame", -1]];
 
-if(_frame < 0) exitWith {};
+if(!(local _entity)) exitWith {};
 
-if(!(local _entity)) exitWith {
-	_clientID = owner _entity;
-	[_entity, _frame] remoteExec ["socap_fnc_EntityUpdatePositionServer", _clientID];
-};
+if(_frame < 0) exitWith {};
 
 _id = _entity getVariable["socap_entity_id", -1];
 if(_id < 0) exitWith {};

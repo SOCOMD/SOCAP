@@ -1,5 +1,9 @@
 #include "\socap\predefined.hpp"
 
+if(!isServer) exitWith {};
+
+if(socap_global_captureEnabled isEqualTo false) exitWith {};
+
 _frame = socap_global_frame;
 _sideWon = str sideEmpty;
 _author = getMissionConfigValue ["author", ""];

@@ -1,7 +1,5 @@
 #include "\socap\predefined.hpp"
 
-[] call socap_fnc_CaptureStartServer;
-
 _frameTimer = 0.0;
 _frameInterval = FRAME_INTERVAL;
 
@@ -18,7 +16,8 @@ while { socap_global_captureEnabled } do {
 		_entities = missionNamespace getVariable["socap_entities", []];
 		{
 			if(!(isNull _x)) then {
-				[_x, socap_global_frame] call socap_fnc_EntityUpdatePositionServer;
+				_clientID = owner _x;
+				[_x, socap_global_frame] remoteExec ["socap_fnc_EntityUpdatePosition", _clientID];
 			};
 		} forEach _entities;
 

@@ -1,11 +1,9 @@
 params ["_entity"];
 
-waitUntil {
-	socap_global_captureEnabled;
-};
+if(!isServer) exitWith {};
 
 _check = _this call socap_fnc_ValidateEntity;
-if((_check select 0) == 0) exitWith {};
+if((_check select 0) isEqualTo 0) exitWith {};
 _class = _check select 1;
 
 _id = socap_global_entity_id;
@@ -31,9 +29,9 @@ if(_entity isKindOf "CAManBase") then {
 	[":NEW:VEH:",[_frame, _id, _class, _name], true] call socap_fnc_Post;
 };
 
-_entity addEventHandler["Deleted", {_this spawn socap_fnc_EntityDeleted;}];
-_entity addEventHandler["Fired", {_this spawn socap_fnc_EntityFired;}];
-_entity addEventHandler["Hit", {_this spawn socap_fnc_EntityHit;}];
+_entity addEventHandler["Deleted", {_this spawn socap_fnc_EntityDeletedServer;}];
+_entity addEventHandler["Fired", {_this spawn socap_fnc_EntityFiredServer;}];
+_entity addEventHandler["Hit", {_this spawn socap_fnc_EntityHitServer;}];
 
 _entities = missionNamespace getVariable["socap_entities", []];
 _entities append [_entity];

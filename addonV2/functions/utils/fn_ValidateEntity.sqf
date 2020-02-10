@@ -6,7 +6,7 @@ if(_class isEqualTo "unknown") exitWith {
 };
 
 if(_entity isKindOf "Man") then {
-	if(name _entity == "") exitWith {
+	if(name _entity isEqualTo "") exitWith {
 		[0, _class];
 	};
 };

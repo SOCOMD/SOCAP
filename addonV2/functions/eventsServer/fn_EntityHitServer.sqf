@@ -1,5 +1,7 @@
 params ["_unit", "_source", "_damage", "_instigator"];
 
+if(!isServer) exitWith {};
+
 _unitID = _unit getVariable["socap_entity_id", -1];
 if(_unitID < 0) exitWith {};
 

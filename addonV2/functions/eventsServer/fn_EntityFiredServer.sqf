@@ -1,5 +1,7 @@
 params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
 
+if(!isServer) exitWith {};
+
 _id = _unit getVariable["socap_entity_id", -1];
 if(_id < 0) exitWith {};
 
@@ -14,7 +16,7 @@ waitUntil {
 	false;
 };
 
-if(count _lastPos == 0) exitWith {};
+if(count _lastPos isEqualTo 0) exitWith {};
 
 _posX = _lastPos select 0;
 _posY = _lastPos select 1;
