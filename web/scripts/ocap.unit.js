@@ -45,9 +45,6 @@ class Unit extends Entity {
 	updateName(position) {
 		let content = "";
 		let name = position.name;
-		if (position.isPlayer == 0) {
-			name += ' [AI]';
-		};
 		if (this._name != name) {
 			this._name = name;
 			this._element.textContent = name;
@@ -61,6 +58,10 @@ class Unit extends Entity {
 		// Only create a nametag label (popup) for players
 		let popup;
 		popup = this._createPopup(this._name);
+		if (this.isPlayer) {
+		} else {
+			popup = this._createPopup(this._name + " <b>[AI]</b>");
+		};
 		this._marker.bindPopup(popup).openPopup();
 	};
 
