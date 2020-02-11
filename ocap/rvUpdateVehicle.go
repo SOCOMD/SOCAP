@@ -58,8 +58,8 @@ func rvUpdateVehicleParser(input string) (rvUpdateVehicle, error) {
 	crew := []int{}
 	if len(crewStr) > 0 {
 		for _, v := range crewStr {
-			id, _ := strconv.Atoi(v)
-			crew = append(crew, id)
+			crewID, _ := strconv.Atoi(v)
+			crew = append(crew, crewID)
 		}
 	}
 
