@@ -2,6 +2,8 @@ params ["_entity"];
 
 if(!isServer) exitWith {};
 
+if(socap_global_captureEnabled isEqualTo false) exitWith {};
+
 _check = _this call socap_fnc_ValidateEntity;
 if((_check select 0) isEqualTo 0) exitWith {};
 _class = _check select 1;
@@ -33,6 +35,4 @@ _entity addEventHandler["Deleted", {_this spawn socap_fnc_EntityDeletedServer;}]
 _entity addEventHandler["Fired", {_this spawn socap_fnc_EntityFiredServer;}];
 _entity addEventHandler["Hit", {_this spawn socap_fnc_EntityHitServer;}];
 
-_entities = missionNamespace getVariable["socap_entities", []];
-_entities append [_entity];
-missionNamespace setVariable["socap_entities", _entities];
+socap_global_entities append [_entity];

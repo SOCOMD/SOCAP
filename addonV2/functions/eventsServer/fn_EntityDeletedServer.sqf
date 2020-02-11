@@ -2,6 +2,5 @@ params ["_entity"];
 
 if(!isServer) exitWith {};
 
-_entities = missionNamespace getVariable["socap_entities", []];
-_entities = _entities - [_entity];
-missionNamespace setVariable["socap_entities", _entities];
+if(socap_global_captureEnabled isEqualTo false) exitWith {};
+socap_global_entities = socap_global_entities - [_entity];

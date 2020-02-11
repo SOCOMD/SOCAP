@@ -13,13 +13,12 @@ while { socap_global_captureEnabled } do {
 		socap_global_frame = socap_global_frame + 1;
 
 		//Update Entity Positions
-		_entities = missionNamespace getVariable["socap_entities", []];
 		{
 			if(!(isNull _x)) then {
 				_clientID = owner _x;
 				[_x, socap_global_frame] remoteExec ["socap_fnc_EntityUpdatePosition", _clientID];
 			};
-		} forEach _entities;
+		} forEach socap_global_entities;
 
 		_frameTimer = _frameInterval;
 	};
