@@ -2,12 +2,6 @@ params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projecti
 
 if(!isServer) exitWith {};
 
-_id = _unit getVariable["socap_entity_id", -1];
-if(_id < 0) exitWith {};
-
-_frame = socap_global_frame;
-_pos = getPosATL _projectile;
-
 _lastPos = [];
 waitUntil {
 	_pos = getPosATL _projectile;
@@ -15,6 +9,13 @@ waitUntil {
 	_lastPos = _pos;
 	false;
 };
+
+if(isNil _unit) exitWith {};
+
+_id = _unit getVariable["socap_entity_id", -1];
+if(_id < 0) exitWith {};
+
+_frame = socap_global_frame;
 
 if(count _lastPos isEqualTo 0) exitWith {};
 
