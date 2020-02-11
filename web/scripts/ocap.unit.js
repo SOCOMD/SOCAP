@@ -60,11 +60,7 @@ class Unit extends Entity {
 
 		// Only create a nametag label (popup) for players
 		let popup;
-		if (this.isPlayer) {
-			popup = this._createPopup(this._name);
-		} else {
-			popup = this._createPopup(this._name + " <b>[AI]</b>");
-		};
+		popup = this._createPopup(this._name);
 		this._marker.bindPopup(popup).openPopup();
 	};
 
