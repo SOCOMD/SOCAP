@@ -54,10 +54,10 @@ func rvUpdateVehicleParser(input string) (rvUpdateVehicle, error) {
 	dir, _ := strconv.Atoi(match[5])
 	isAlive, _ := strconv.Atoi(match[6])
 
-	crewStr := strings.Split(match[7], ",")
 	crew := []int{}
-	if len(crewStr) > 0 {
-		for _, v := range crewStr {
+	if len(match[7]) > 0 {
+		crewArgs := strings.Split(match[7], ",")
+		for _, v := range crewArgs {
 			crewID, _ := strconv.Atoi(v)
 			crew = append(crew, crewID)
 		}
