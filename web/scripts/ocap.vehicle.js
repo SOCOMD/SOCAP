@@ -49,7 +49,12 @@ class Vehicle extends Entity {
 	createMarker(latLng) {
 		super.createMarker(latLng);
 
-		let popup = this._createPopup(this._name);
+		let popup = this._marker.getPopup();
+		if(popup != null) {
+			return;
+		}
+
+		popup = this._createPopup(this._name);
 		this._marker.bindPopup(popup).openPopup();
 
 		// Wait until popup loads, set permanent size

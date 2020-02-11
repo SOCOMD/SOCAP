@@ -55,10 +55,14 @@ class Unit extends Entity {
 	createMarker(latLng) {
 		super.createMarker(latLng);
 
+		let popup = this._marker.getPopup();
+		if(popup != null) {
+			return;
+		}
+
 		// Only create a nametag label (popup) for players
-		let popup;
-		popup = this._createPopup(this._name);
 		if (this.isPlayer) {
+			popup = this._createPopup(this._name);
 		} else {
 			popup = this._createPopup(this._name + " <b>[AI]</b>");
 		};
