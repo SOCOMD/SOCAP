@@ -14,8 +14,8 @@ type rvFired struct {
 	Position vec2
 }
 
-//REF: `2,50,[24869.5,17037.4]`
-var rvFiredRe *regexp.Regexp = regexp.MustCompile(`(\d+),(\d+),\[(\d+\.?\d*?),(\d+\.?\d*?)\]`)
+//REF: `2,50,[24869.5,-17037.4]`
+var rvFiredRe *regexp.Regexp = regexp.MustCompile(`(\d+),(\d+),\[(-?\d+\.?\d*?),(-?\d+\.?\d*?)\]`)
 
 func rvFiredHandler(args []string) error {
 	event, err := rvFiredParser(strings.Join(args, ","))
