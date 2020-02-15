@@ -16,7 +16,7 @@ type rvUpdateVehicle struct {
 }
 
 //REF: `1,[24077.5,-16301.7,0],0,1,[]`
-var rvUpdateVehicleRe *regexp.Regexp = regexp.MustCompile(`(\d+),\[(-?\d+\.?\d*?),(-?\d+\.?\d*?),(-?\d+\.?\d*?)\],(\d+),(\d+),\[(.*?)\]`)
+var rvUpdateVehicleRe *regexp.Regexp = regexp.MustCompile(`(\d+),\[(-?\d+\.?\d*?),(-?\d+\.?\d*?),(-?\d+\.?\d*?)\],(-?\d+),(\d+),\[(.*?)\]`)
 
 func rvUpdateVehicleHandler(args []string) error {
 	update, err := rvUpdateVehicleParser(strings.Join(args, ","))

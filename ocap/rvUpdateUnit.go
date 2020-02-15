@@ -17,7 +17,7 @@ type rvUpdateUnit struct {
 }
 
 //REF: `0,[24075.7,-16292.1],19,1,0,1`
-var rvUpdateUnitRe *regexp.Regexp = regexp.MustCompile(`(\d+),\[(-?\d+\.?\d*?),(-?\d+\.?\d*?)\],(\d+),(\d+),(\d+),(\d)`)
+var rvUpdateUnitRe *regexp.Regexp = regexp.MustCompile(`(\d+),\[(-?\d+\.?\d*?),(-?\d+\.?\d*?)\],(-?\d+),(\d+),(\d+),(\d)`)
 
 func rvUpdateUnitHandler(args []string) error {
 	update, err := rvUpdateUnitParser(strings.Join(args, ","))
