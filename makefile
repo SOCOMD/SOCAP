@@ -29,7 +29,7 @@ build-addon:
 
 .PHONY: build-addon-server
 build-addon-server:
-	@$$HOME/.local/out/mikero/makepbo -N ./addon ./out/socap.pbo; \
+	@$$HOME/.local/bin/mikero/makepbo -N ./addon ./out/socap.pbo; \
 	cp -f ./out/socap.pbo /srv/games/servers/arma3_mods/SOCOMD_Core/@socap/addons/socap.pbo;
 
 # example make DATA_DIR=$(pwd)/tmp/data MAPS_DIR=$(pwd)/tmp/maps start-website 
