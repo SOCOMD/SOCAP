@@ -12,12 +12,6 @@ if (count($_GET) == 0) {
 	exit;
 }
 
-$password = $_GET["secret"];
-if($password != "uid10t") {
-	echo "wrong password";
-	die();
-}
-
 // if (!in_array($_SERVER['REMOTE_ADDR'], $ipGameServer)) die();
 
 if (!file_exists("./data/data.db")) {

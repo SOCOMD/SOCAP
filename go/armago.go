@@ -10,7 +10,7 @@ import "C"
 import (
 	"unsafe"
 
-	"github.com/socomd/ocap/ocap"
+	"github.com/socomd/socap/go/ocap"
 )
 
 //export goRVExtensionVersion

@@ -1,4 +1,4 @@
-## SOCAP
+# SOCAP
 OCAP rewrite for our A3 milsim group [SOCOMD](http://www.socomd.com/)
 
 # Terrain Export
