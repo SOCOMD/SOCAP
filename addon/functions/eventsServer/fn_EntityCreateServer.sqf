@@ -32,7 +32,7 @@ if(_entity isKindOf "CAManBase") then {
 };
 
 _entity addEventHandler["Deleted", {_this spawn socap_fnc_EntityDeletedServer;}];
-_entity addEventHandler["Fired", {_this spawn socap_fnc_EntityFiredServer;}];
+_entity addEventHandler["FiredMan", {_this spawn socap_fnc_EntityFiredServer;}];
 _entity addEventHandler["Hit", {_this spawn socap_fnc_EntityHitServer;}];
 
 socap_global_entities append [_entity];
